@@ -30,8 +30,8 @@ Bot Twitch comportant quelques commandes d'assistance et des jeux pour le chat !
 
 ## Démarrer le bot en local
 
-Dans le dossier _/src_, ouvrir un terminal bash et exécuter la commande suivante : `node bot.js`
-Se rendre sur la chaîne définie dans la variable <CHANNEL_NAME> renseignée auparavant, le bot est opérationnel !
+* Dans le dossier _/src_, ouvrir un terminal bash et exécuter la commande suivante : `node bot.js`
+* Se rendre sur la chaîne définie dans la variable <CHANNEL_NAME> renseignée auparavant, le bot est opérationnel !
 
 ## Démarrer le bot sur Glitch
 
