@@ -1,0 +1,17 @@
+{
+    "tmiCredentials": {
+        "identity": {
+          "username": <BOT_USERNAME>,
+          "password": <TMI_OAUTH_TOKEN>
+        },
+        "channels": [
+          <CHANNEL_NAME>
+        ]
+    },
+    "twitchCredentials": { 
+        "identity": {
+            "clientId": <TWITCH_CLIENT_ID>,
+            "oauthToken": <TWITCH_OAUTH_TOKEN>
+        }
+    }
+}
