@@ -2,16 +2,20 @@ const twitchAPI = require('../twitch/callTwitchFunctions.js');
 
 module.exports.execute = function (client, target, chaine) { 
     if(null != chaine){
-        const user = chaine;
-        twitchAPI.getUserInfo(client, user, resultat => {
-          console.log("Return : ", resultat);
-          if(0 == resultat.data.length){
-            client.say(target, "Désolé, mais je ne connais pas cette chaîne :/");
-          } else {
-            client.say(target, "Parce que c'est la famille, lâche ton follow ici : https://twitch.tv/" + user + " orionBEER");
-          }
-        })
-      } else {
-        client.say(target, "Donne-moi le nom de la chaîne idiot !");
-      }
+      twitchAPI.getUserInfo(client, chaine, resultat => {
+        traitementOnCallback(client, target, chaine, resultat);
+      });
+    } else {
+      client.say(target, "Donne-moi le nom de la chaîne idiot !");
+    }
+};
+
+
+function traitementOnCallback(client, target, user, resultat){
+  // On regarde si l'appel Twitch a renvoyé des informations sur la chaine
+  if(0 == resultat.data.length){
+    client.say(target, "Désolé, mais je ne connais pas cette chaîne :/");
+  } else {
+    client.say(target, `imGlitch Parce que c'est la famille, lâche ton follow ici : https://twitch.tv/${user}`);
+  }
 };

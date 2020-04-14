@@ -7,4 +7,4 @@ module.exports.execute = function (client, target) {
 function rollDice () {
     const sides = 6;
     return Math.floor(Math.random() * sides) + 1;
-  }
+}

@@ -10,6 +10,7 @@ module.exports.getUserInfo = function (client, username, callback) {
             "Client-ID": config.twitchCredentials.identity.clientId
         }
     }, function(err, res, body) {
+        console.log("getUserInfo pour username " + username + " : ", body);
         callback(body);
     });
-}
+};

@@ -19,7 +19,7 @@ client.connect();
 // Called every time a message comes in
 function onMessageHandler (target, context, msg, self) {
 
-  // Ignore messages du bot et pas les commandes commençant par '!'
+  // Ignore messages du bot et les commandes ne commençant pas par '!'
   if (self || msg.charAt(0) != '!') { return; } 
 
   // On split le message en fonction des espaces, 
