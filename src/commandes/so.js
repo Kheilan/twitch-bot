@@ -16,6 +16,6 @@ function traitementOnCallback(client, target, user, resultat){
   if(0 == resultat.data.length){
     client.say(target, "Désolé, mais je ne connais pas cette chaîne :/");
   } else {
-    client.say(target, `imGlitch Si tu ne connais pas, lâche ton follow ici : https://twitch.tv/${user}`);
+    client.say(target, `imGlitch Tu ne connais pas ?! Va lâcher ton follow ici : https://twitch.tv/${user}`);
   }
 };
