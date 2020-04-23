@@ -5,6 +5,7 @@ const config = require('./config/config.json');
 // Commandes
 const dice = require('./commandes/dice.js');
 const so = require('./commandes/so.js');
+const rollout = require('./commandes/class/rollout');
 
 // Create a client with our options
 const client = new tmi.client(config.tmiCredentials);
@@ -38,7 +39,9 @@ function onMessageHandler (target, context, msg, self) {
         console.log(`-- Commande ${commande} exécutée`);
         so.execute(client, target, commande[1]);
         break;
-
+      case rollout.GetCommand():
+        rollout.Execute(client, target, context, msg, self);
+        break;
       default:
         console.log(`-- Commande ${commande} inconnue`);
         break;
