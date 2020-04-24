@@ -5,6 +5,7 @@ const config = require('./config/config.json');
 // Commandes
 const dice = require('./commandes/dice.js');
 const so = require('./commandes/so.js');
+const clip = require('./commandes/clip.js');
 
 // Create a client with our options
 const client = new tmi.client(config.tmiCredentials);
@@ -37,6 +38,11 @@ function onMessageHandler (target, context, msg, self) {
       case "!so":
         console.log(`-- Commande ${commande} exécutée`);
         so.execute(client, target, commande[1]);
+        break;
+
+      case "!clip":
+        console.log(`-- Commande ${commande} exécutée`);
+        clip.execute(client, target);
         break;
 
       default:
