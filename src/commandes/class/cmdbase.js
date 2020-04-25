@@ -1,9 +1,10 @@
 class CommandBase
 {
-    constructor(cmd, description, delay = 0)
+    constructor(cmd, description, minMonthsSub = 0, delay = 0)
     {
         this._cmd = cmd;
         this._description = description;
+        this._minMonthsSub = minMonthsSub;
         this._delayInMs = delay;
     }
 
@@ -11,20 +12,21 @@ class CommandBase
         Note: The method need to be override
         Every a command is executed, a log message is prompt.
     */
-    Execute(usedByUsername, usedByUserId, roomName, roomId)
+    execute(usedByUsername, usedByUserId, roomName, roomId)
     {
         if (this.__proto__ === CommandBase.prototype)
             console.log("The execute function need to be override.");
         else
-            console.log(this._LogCommand(usedByUsername, usedByUserId, roomName, roomId));
+            console.log(this._logCommand(usedByUsername, usedByUserId, roomName, roomId));
     }
 
     // Determine if function can be executed, verify the delay of msg posted and the previous one.
-    _CanExecute()
+    _canExecute(badges)
     {
         let currentDate = new Date().getTime();
 
-        if (this._lastUse === undefined || currentDate - this._lastUse >= this.GetDelay())
+        if ((this._lastUse === undefined || currentDate - this._lastUse >= this.getDelay()) &&
+            (badges !== null && badges.subscriber >= this._minMonthsSub))
         {
             this._lastUse = currentDate;
             return true;
@@ -33,7 +35,7 @@ class CommandBase
     }
 
     // Return a formated message for logs.
-    _LogCommand(usedByUsername, usedByUserId, roomName, roomId)
+    _logCommand(usedByUsername, usedByUserId, roomName, roomId)
     {
         let currentDate = new Date();
         const month = currentDate.getMonth() > 9 ? currentDate.getMonth() : '0' + currentDate.getMonth();
@@ -47,24 +49,24 @@ class CommandBase
     }
 
     // Return a brief command description
-    GetCommandDescription()
+    getCommandDescription()
     {
         return this._description ? this._description : "No description.";
     }
 
     // #Getter / Setter
     // Delay before command can be used again.
-    GetCommand()
+    getCommand()
     {
         return this._cmd;
     }
 
-    GetDelay()
+    getDelay()
     {
         return this._delayInMs;
     }
 
-    SetDelay(delayInMs)
+    setDelay(delayInMs)
     {
         this._delayInMs = delayInMs;
     }

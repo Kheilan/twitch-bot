@@ -6,6 +6,7 @@ const config = require('./config/config.json');
 const dice = require('./commandes/dice.js');
 const so = require('./commandes/so.js');
 const rollout = require('./commandes/class/rollout');
+const mark = require('./commandes/class/mark');
 
 // Create a client with our options
 const client = new tmi.client(config.tmiCredentials);
@@ -21,7 +22,9 @@ client.connect();
 function onMessageHandler (target, context, msg, self) {
 
   // Ignore messages du bot et les commandes ne commençant pas par '!'
-  if (self || msg.charAt(0) != '!') { return; } 
+  if (self || msg.charAt(0) != '!') {
+    return;
+  }
 
   // On split le message en fonction des espaces, 
   // le premier étant le nom de la commande à exécuter
@@ -30,17 +33,19 @@ function onMessageHandler (target, context, msg, self) {
   // On recherche si la commande fournie est dans la liste des commandes existantes
   // TODO Ajouter commande help (générale + spécifique par commande ?)
   switch(commande[0]) {
-      case "!dice":
-        console.log(`-- Commande ${commande} exécutée`);
-        dice.execute(client, target);
+      // case "!dice":
+      //   console.log(`-- Commande ${commande} exécutée`);
+      //   dice.execute(client, target);
+      //   break;
+      // case "!so":
+      //   console.log(`-- Commande ${commande} exécutée`);
+      //   so.execute(client, target, commande[1]);
+      //   break;
+      case mark.getCommand():
+        mark.execute(client, target, context, msg, self);
         break;
-      
-      case "!so":
-        console.log(`-- Commande ${commande} exécutée`);
-        so.execute(client, target, commande[1]);
-        break;
-      case rollout.GetCommand():
-        rollout.Execute(client, target, context, msg, self);
+      case rollout.getCommand():
+        rollout.execute(client, target, context, msg, self);
         break;
       default:
         console.log(`-- Commande ${commande} inconnue`);
