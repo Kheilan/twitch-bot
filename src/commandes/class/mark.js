@@ -27,6 +27,7 @@ class CmdMark extends CommandBase
     execute(client, channel, tags, message, self)
     {
         if (!this._canExecute(tags.badges)) {
+            client.say(channel, `Désolé tu n'as pas les autorisations nécessaires pour lancer cette commande orionCOEUR [${this.getDelay()}ms⏱]`);
             return;
         }
 
