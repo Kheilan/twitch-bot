@@ -9,13 +9,13 @@ class CommandBase
     }
 
     /*
-        Note: The method need to be override
-        Every a command is executed, a log message is prompt.
+        Note: The method needs to be overrided
+        Everytime a command is executed, a log message is prompt.
     */
     execute(usedByUsername, usedByUserId, roomName, roomId)
     {
         if (this.__proto__ === CommandBase.prototype)
-            console.log("The execute function need to be override.");
+            console.log("The execute function needs to be overrided.");
         else
             console.log(this._logCommand(usedByUsername, usedByUserId, roomName, roomId));
     }
@@ -26,7 +26,7 @@ class CommandBase
         let currentDate = new Date().getTime();
 
         if ((this._lastUse === undefined || currentDate - this._lastUse >= this.getDelay()) &&
-            (badges !== null && badges.subscriber >= this._minMonthsSub))
+            (this._minMonthsSub == 0 || (badges !== null && badges.subscriber >= this._minMonthsSub)))
         {
             this._lastUse = currentDate;
             return true;
