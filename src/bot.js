@@ -3,8 +3,7 @@ const tmi = require('tmi.js');
 const config = require('./config/config.json');
 
 // Commandes
-const dice = require('./commandes/dice.js');
-const so = require('./commandes/so.js');
+const so = require('./commandes/class/so');
 const rollout = require('./commandes/class/rollout');
 const mark = require('./commandes/class/mark');
 
@@ -33,14 +32,9 @@ function onMessageHandler (target, context, msg, self) {
   // On recherche si la commande fournie est dans la liste des commandes existantes
   // TODO Ajouter commande help (générale + spécifique par commande ?)
   switch(commande[0]) {
-      // case "!dice":
-      //   console.log(`-- Commande ${commande} exécutée`);
-      //   dice.execute(client, target);
-      //   break;
-      // case "!so":
-      //   console.log(`-- Commande ${commande} exécutée`);
-      //   so.execute(client, target, commande[1]);
-      //   break;
+      case so.getCommand():
+        so.execute(client, target, context, msg, self);
+        break;
       case mark.getCommand():
         mark.execute(client, target, context, msg, self);
         break;
